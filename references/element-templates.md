@@ -89,6 +89,64 @@ Copy-paste JSON templates for each Excalidraw element type. The `strokeColor` an
 }
 ```
 
+## Ellipse (Circle) with Text Inside
+Use this when an ellipse/circle needs a label centered inside it. The ellipse must declare `boundElements` and the text must set `containerId`.
+```json
+{
+  "type": "ellipse",
+  "id": "circle1",
+  "x": 100, "y": 100, "width": 120, "height": 120,
+  "strokeColor": "<stroke from palette based on semantic purpose>",
+  "backgroundColor": "<fill from palette based on semantic purpose>",
+  "fillStyle": "solid",
+  "strokeWidth": 2,
+  "strokeStyle": "solid",
+  "roughness": 0,
+  "opacity": 100,
+  "angle": 0,
+  "seed": 66666,
+  "version": 1,
+  "versionNonce": 77777,
+  "isDeleted": false,
+  "groupIds": [],
+  "boundElements": [{"id": "circle_text1", "type": "text"}],
+  "link": null,
+  "locked": false
+}
+```
+```json
+{
+  "type": "text",
+  "id": "circle_text1",
+  "x": 100, "y": 148,
+  "width": 120, "height": 25,
+  "text": "Label",
+  "originalText": "Label",
+  "fontSize": 16,
+  "fontFamily": 3,
+  "textAlign": "center",
+  "verticalAlign": "middle",
+  "strokeColor": "<text color from palette>",
+  "backgroundColor": "transparent",
+  "fillStyle": "solid",
+  "strokeWidth": 1,
+  "strokeStyle": "solid",
+  "roughness": 0,
+  "opacity": 100,
+  "angle": 0,
+  "seed": 88888,
+  "version": 1,
+  "versionNonce": 99999,
+  "isDeleted": false,
+  "groupIds": [],
+  "boundElements": null,
+  "link": null,
+  "locked": false,
+  "containerId": "circle1",
+  "lineHeight": 1.25
+}
+```
+
 ## Rectangle
 ```json
 {
