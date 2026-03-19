@@ -4,19 +4,26 @@ A coding agent skill that generates beautiful and practical Excalidraw diagrams 
 
 Compatible with any coding agent that supports skills. For agents that read from `.claude/skills/` (like [Claude Code](https://docs.anthropic.com/en/docs/claude-code) and [OpenCode](https://github.com/nicepkg/OpenCode)), just drop it in and go.
 
+> **Based on the original work by [coleam00](https://github.com/coleam00/excalidraw-diagram-skill).** This fork adds fixes and improvements on top of that foundation.
+
 ## What Makes This Different
 
 - **Diagrams that argue, not display.** Every shape/group of shapes mirrors the concept it represents — fan-outs for one-to-many, timelines for sequences, convergence for aggregation. No uniform card grids.
 - **Evidence artifacts.** As an example, technical diagrams include real code snippets and actual JSON payloads.
 - **Built-in visual validation.** A Playwright-based render pipeline lets the agent see its own output, catch layout issues (overlapping text, misaligned arrows, unbalanced spacing), and fix them in a loop before delivering.
 - **Brand-customizable.** All colors and brand styles live in a single file (`references/color-palette.md`). Swap it out and every diagram follows your palette.
+- **Correctly centered text in circles.** Text placed inside ellipses/circles is now properly bound and centered — no more top-left alignment.
+
+## Changes from Original
+
+- **Fixed circle text alignment** — Added a proper ellipse-with-text template that uses `boundElements` + `containerId` binding so text is centered (`textAlign: center`, `verticalAlign: middle`) inside circles, matching the behavior already in place for rectangles.
 
 ## Installation
 
 Clone or download this repo, then copy it into your project's `.claude/skills/` directory:
 
 ```bash
-git clone https://github.com/coleam00/excalidraw-diagram-skill.git
+git clone https://github.com/forkbearer/excalidraw-diagram-skill.git
 cp -r excalidraw-diagram-skill .claude/skills/excalidraw-diagram
 ```
 
