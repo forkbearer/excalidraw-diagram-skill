@@ -50,6 +50,42 @@ Use concrete examples when:
 
 ---
 
+## Topology Selection (Do This Second)
+
+After assessing depth, **commit to one topology before drawing anything**. The topology is the skeleton of the diagram — it determines how elements are positioned, how arrows flow, and what the diagram argues structurally. A mismatched topology produces a diagram that looks organized but argues nothing.
+
+### The Selection Process
+
+**Step 1 — Extract the primary relationship from the user's request.**
+Ask: what is the single most important thing this diagram needs to show? Not what components exist, but what *relationship* between them matters.
+
+**Step 2 — Match to a topology using the table below.**
+
+**Step 3 — State your choice out loud** (in your response) before generating any JSON: *"This diagram will use a Pipeline topology because the argument is about sequential data transformation stages."* If you can't articulate why, reconsider.
+
+**Step 4 — Validate with the Isomorphism Test.** Remove all text mentally. Does the chosen structure alone communicate the relationship? If not, pick a different topology.
+
+### Topology Reference
+
+| Topology | Use When | Core Argument | Risk |
+|----------|----------|---------------|------|
+| **Hub-and-Spoke** | One component is the architectural pivot (API gateway, broker, load balancer) | Centralized control, single point of entry/failure | Hides what the spokes actually do |
+| **Pipeline** | Data/requests move through a defined sequence of transforms | What happens at each stage and in what order | Becomes a boring left-to-right box chain if stages aren't differentiated |
+| **Event-Driven / Timeline** | System is async; ordering and triggering of events is the behavior | What triggers what, and when | Hard to read if too many events cross too many services |
+| **C4 Context** | Explaining scope — what the system does, for whom, with which external systems | System boundaries and external integrations | Too abstract to teach internals |
+| **Layered / Tier** | Cross-layer calls or separation of concerns ARE the argument | Why a call is expensive or wrong, where a boundary violation occurs | Becomes a card grid — only use if the layer boundary itself is the point |
+| **Swimlane / Boundary** | Ownership, trust zones, or handoff points are the argument | Where responsibility transfers, where a trust boundary exists | Becomes an org chart — only use if the boundary itself matters |
+| **Tree / Hierarchy** | System has clear parent-child containment (infra, DNS, monorepo, IAM) | Ownership and containment structure | Looks like a taxonomy, loses flow |
+| **Mesh / Network** | Highly interconnected services; coupling or blast radius is the argument | Which failure cascades where, how tightly coupled the system is | Visually chaotic if overdone — use only when chaos IS the point |
+
+### Mixing Topologies
+
+Avoid it by default. A diagram with two competing topologies confuses the eye and weakens the argument.
+
+**When mixing is justified**: large comprehensive diagrams where a macro topology (e.g. Swimlane for ownership zones) contains micro topologies (e.g. Pipeline inside each zone). In this case, the macro topology must be visually dominant — stronger borders, more whitespace, larger labels — and the micro topologies must be clearly subordinate.
+
+---
+
 ## Research Mandate (For Technical Diagrams)
 
 **Before drawing anything technical, research the actual specifications.**
@@ -168,6 +204,9 @@ Before anything else, determine if this needs to be:
 - **Comprehensive/Technical**: Concrete examples, code snippets, real data (systems, architectures, tutorials)
 
 **If comprehensive**: Do research first. Look up actual specs, formats, event names, APIs.
+
+### Step 0.5: Select and Commit to a Topology
+Using the **Topology Selection** section above, identify which topology fits the user's requirements. State your choice explicitly before proceeding. Do not start laying out elements until the topology is decided — it determines everything about how coordinates, spacing, and flow are structured.
 
 ### Step 1: Understand Deeply
 Read the content. For each concept, ask:
