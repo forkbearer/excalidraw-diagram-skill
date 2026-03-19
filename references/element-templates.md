@@ -174,6 +174,7 @@ Use this when an ellipse/circle needs a label centered inside it. The ellipse mu
 ```
 
 ## Text (centered in shape)
+Font size should match the hierarchy tier: 36px (title), 20px (primary component label), 16px (secondary label), 14px (annotation/detail). Never go below 14px.
 ```json
 {
   "type": "text",

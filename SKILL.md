@@ -418,7 +418,20 @@ Position alone doesn't show relationships. If A relates to B, there must be an a
 }
 ```
 
-Settings: `fontSize: 16`, `fontFamily: 3`, `textAlign: "center"`, `verticalAlign: "middle"`
+Settings: `fontFamily: 3`, `textAlign: "center"`, `verticalAlign: "middle"`
+
+### Font Size Hierarchy
+
+Use consistent font sizes across the diagram to establish visual hierarchy. Never go below 14px — text smaller than that becomes unreadable in PNG exports.
+
+| Tier | Size | Use For |
+|------|------|---------|
+| Title | `36px` | Diagram title, major section headings |
+| Primary | `20px` | Component/service names, key labels |
+| Secondary | `16px` | Sub-labels, supporting element names |
+| Detail | `14px` | Annotations, metadata, arrow labels, legend entries |
+
+**Rule**: A diagram title (36px) should always be one tier larger than the largest label inside a shape. Never mix more than three tiers within a single diagram section — it creates noise rather than hierarchy.
 
 ---
 
