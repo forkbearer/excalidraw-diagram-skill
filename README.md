@@ -4,21 +4,18 @@ A coding agent skill that generates beautiful and practical Excalidraw diagrams 
 
 Compatible with any coding agent that supports skills. For agents that read from `.claude/skills/` (like [Claude Code](https://docs.anthropic.com/en/docs/claude-code) and [OpenCode](https://github.com/nicepkg/OpenCode)), just drop it in and go.
 
-> **Based on the original work by [coleam00](https://github.com/coleam00/excalidraw-diagram-skill).** This fork adds fixes and improvements on top of that foundation.
+---
 
-## What Makes This Different
+## Part 1: Original Skill (by [coleam00](https://github.com/coleam00/excalidraw-diagram-skill))
+
+### What Makes This Different
 
 - **Diagrams that argue, not display.** Every shape/group of shapes mirrors the concept it represents — fan-outs for one-to-many, timelines for sequences, convergence for aggregation. No uniform card grids.
-- **Evidence artifacts.** As an example, technical diagrams include real code snippets and actual JSON payloads.
+- **Evidence artifacts.** Technical diagrams include real code snippets and actual JSON payloads.
 - **Built-in visual validation.** A Playwright-based render pipeline lets the agent see its own output, catch layout issues (overlapping text, misaligned arrows, unbalanced spacing), and fix them in a loop before delivering.
 - **Brand-customizable.** All colors and brand styles live in a single file (`references/color-palette.md`). Swap it out and every diagram follows your palette.
-- **Correctly centered text in circles.** Text placed inside ellipses/circles is now properly bound and centered — no more top-left alignment.
 
-## Changes from Original
-
-- **Fixed circle text alignment** — Added a proper ellipse-with-text template that uses `boundElements` + `containerId` binding so text is centered (`textAlign: center`, `verticalAlign: middle`) inside circles, matching the behavior already in place for rectangles.
-
-## Installation
+### Installation
 
 Clone or download this repo, then copy it into your project's `.claude/skills/` directory:
 
@@ -27,7 +24,7 @@ git clone https://github.com/forkbearer/excalidraw-diagram-skill.git
 cp -r excalidraw-diagram-skill .claude/skills/excalidraw-diagram
 ```
 
-## Setup
+### Setup
 
 The skill includes a render pipeline that lets the agent visually validate its diagrams. There are two ways to set it up:
 
@@ -43,7 +40,7 @@ uv sync
 uv run playwright install chromium
 ```
 
-## Usage
+### Usage
 
 Ask your coding agent to create a diagram:
 
@@ -51,11 +48,11 @@ Ask your coding agent to create a diagram:
 
 The skill handles the rest — concept mapping, layout, JSON generation, rendering, and visual validation.
 
-## Customize Colors
+### Customize Colors
 
 Edit `references/color-palette.md` to match your brand. Everything else in the skill is universal design methodology.
 
-## File Structure
+### File Structure
 
 ```
 excalidraw-diagram/
@@ -68,3 +65,18 @@ excalidraw-diagram/
     render_template.html            # Browser template for rendering
     pyproject.toml                  # Python dependencies (playwright)
 ```
+
+---
+
+## Part 2: My Changes
+
+### Fixed: Text inside circles is now centered
+
+Text placed inside ellipses/circles was aligning to the top-left instead of the center. The root cause was that the ellipse template had no `boundElements` and the text had no `containerId`, so the agent was using the free-floating text template (which defaults to `textAlign: left`, `verticalAlign: top`) and just visually overlaying it on the circle.
+
+**Fix:** Added a proper ellipse-with-text template to `references/element-templates.md` that:
+- Sets `boundElements` on the ellipse to reference the text element
+- Sets `containerId` on the text to reference the ellipse
+- Uses `textAlign: center` and `verticalAlign: middle`
+
+This matches the binding pattern already in place for rectangles.
