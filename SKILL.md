@@ -434,6 +434,22 @@ Instead of full shapes, use small dots (10-20px ellipses) as:
 - **Secondary**: 120×60
 - **Small**: 60×40
 
+### Architecture Element Sizes
+
+Standard sizes for common system design components. Consistent sizing signals component importance and makes diagrams scannable.
+
+| Component Type | Width × Height | Label Font | Notes |
+|----------------|---------------|------------|-------|
+| External system / actor | 160×80 | 16px | Dashed stroke to signal external |
+| Service / microservice | 160×72 | 16px | Core building block |
+| API gateway / load balancer | 200×72 | 16px | Wider to suggest breadth |
+| Database / data store | 160×80 | 16px | Use cylinder hint (see templates) |
+| Message queue / event bus | 200×64 | 16px | Wider + thinner to suggest channel |
+| User / client | 80×80 | 14px | Ellipse, not rectangle |
+| Zone / swimlane container | varies | 20px header | Background fill, no visible stroke |
+| Diagram title | — | 36px | Free-floating, top of canvas |
+| Section heading | — | 20px | Free-floating, above its zone |
+
 ### Spacing & Grid System
 
 Use the **8-point grid**: all x/y coordinates, widths, heights, and gaps should be multiples of 8 (8, 16, 24, 32, 40, 48, 64, 80…). This creates subconscious visual rhythm and makes diagrams feel intentional rather than randomly placed.

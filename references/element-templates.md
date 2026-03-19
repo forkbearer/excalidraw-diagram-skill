@@ -239,3 +239,190 @@ Font size should match the hierarchy tier: 36px (title), 20px (primary component
 ```
 
 For curves: use 3+ points in `points` array.
+
+---
+
+## Architecture Element Templates
+
+Standard building blocks for system design and software architecture diagrams. All sizes follow the 8-point grid. Pull colors from `color-palette.md` based on semantic purpose.
+
+### Service / Microservice (160×72)
+```json
+{
+  "type": "rectangle",
+  "id": "service1",
+  "x": 100, "y": 100, "width": 160, "height": 72,
+  "strokeColor": "<stroke from palette>",
+  "backgroundColor": "<fill from palette>",
+  "fillStyle": "solid",
+  "strokeWidth": 2,
+  "strokeStyle": "solid",
+  "roughness": 0,
+  "opacity": 100,
+  "angle": 0,
+  "seed": 110001,
+  "version": 1,
+  "versionNonce": 110002,
+  "isDeleted": false,
+  "groupIds": [],
+  "boundElements": [{"id": "service1_label", "type": "text"}],
+  "link": null,
+  "locked": false,
+  "roundness": {"type": 3}
+}
+```
+
+### External System (160×80, dashed stroke)
+Use for any system outside your ownership boundary. Dashed stroke signals "external".
+```json
+{
+  "type": "rectangle",
+  "id": "ext1",
+  "x": 100, "y": 100, "width": 160, "height": 80,
+  "strokeColor": "<stroke from palette — use Inactive/Disabled>",
+  "backgroundColor": "<fill from palette — use Inactive/Disabled>",
+  "fillStyle": "solid",
+  "strokeWidth": 2,
+  "strokeStyle": "dashed",
+  "roughness": 0,
+  "opacity": 100,
+  "angle": 0,
+  "seed": 120001,
+  "version": 1,
+  "versionNonce": 120002,
+  "isDeleted": false,
+  "groupIds": [],
+  "boundElements": [{"id": "ext1_label", "type": "text"}],
+  "link": null,
+  "locked": false,
+  "roundness": {"type": 3}
+}
+```
+
+### Database / Data Store (160×80, cylinder hint)
+Excalidraw has no native cylinder. Approximate it: rectangle with a narrow ellipse on top to suggest a cylinder cap.
+```json
+{
+  "type": "rectangle",
+  "id": "db1",
+  "x": 100, "y": 116, "width": 160, "height": 64,
+  "strokeColor": "<stroke from palette>",
+  "backgroundColor": "<fill from palette>",
+  "fillStyle": "solid",
+  "strokeWidth": 2,
+  "strokeStyle": "solid",
+  "roughness": 0,
+  "opacity": 100,
+  "angle": 0,
+  "seed": 130001,
+  "version": 1,
+  "versionNonce": 130002,
+  "isDeleted": false,
+  "groupIds": ["db1_group"],
+  "boundElements": [{"id": "db1_label", "type": "text"}],
+  "link": null,
+  "locked": false
+}
+```
+```json
+{
+  "type": "ellipse",
+  "id": "db1_cap",
+  "x": 100, "y": 100, "width": 160, "height": 32,
+  "strokeColor": "<same stroke as rectangle>",
+  "backgroundColor": "<same fill as rectangle>",
+  "fillStyle": "solid",
+  "strokeWidth": 2,
+  "strokeStyle": "solid",
+  "roughness": 0,
+  "opacity": 100,
+  "angle": 0,
+  "seed": 130003,
+  "version": 1,
+  "versionNonce": 130004,
+  "isDeleted": false,
+  "groupIds": ["db1_group"],
+  "boundElements": null,
+  "link": null,
+  "locked": false
+}
+```
+
+### Message Queue / Event Bus (200×64, wider and thinner)
+Width signals a channel/bus; thinner height distinguishes it from a service.
+```json
+{
+  "type": "rectangle",
+  "id": "queue1",
+  "x": 100, "y": 100, "width": 200, "height": 64,
+  "strokeColor": "<stroke from palette>",
+  "backgroundColor": "<fill from palette>",
+  "fillStyle": "solid",
+  "strokeWidth": 2,
+  "strokeStyle": "solid",
+  "roughness": 0,
+  "opacity": 100,
+  "angle": 0,
+  "seed": 140001,
+  "version": 1,
+  "versionNonce": 140002,
+  "isDeleted": false,
+  "groupIds": [],
+  "boundElements": [{"id": "queue1_label", "type": "text"}],
+  "link": null,
+  "locked": false,
+  "roundness": {"type": 3}
+}
+```
+
+### User / Client (80×80 ellipse)
+```json
+{
+  "type": "ellipse",
+  "id": "user1",
+  "x": 100, "y": 100, "width": 80, "height": 80,
+  "strokeColor": "<stroke from palette — use Start/Trigger>",
+  "backgroundColor": "<fill from palette — use Start/Trigger>",
+  "fillStyle": "solid",
+  "strokeWidth": 2,
+  "strokeStyle": "solid",
+  "roughness": 0,
+  "opacity": 100,
+  "angle": 0,
+  "seed": 150001,
+  "version": 1,
+  "versionNonce": 150002,
+  "isDeleted": false,
+  "groupIds": [],
+  "boundElements": [{"id": "user1_label", "type": "text"}],
+  "link": null,
+  "locked": false
+}
+```
+
+### Zone / Swimlane Container
+A large background rectangle that groups related services. Use a very light fill and no visible stroke (or a very subtle one). Place section heading as free-floating text above it.
+```json
+{
+  "type": "rectangle",
+  "id": "zone1",
+  "x": 80, "y": 80, "width": 600, "height": 320,
+  "strokeColor": "<subtle stroke — e.g. Inactive/Disabled stroke>",
+  "backgroundColor": "<very light fill — e.g. Secondary or Tertiary fill>",
+  "fillStyle": "solid",
+  "strokeWidth": 1,
+  "strokeStyle": "solid",
+  "roughness": 0,
+  "opacity": 100,
+  "angle": 0,
+  "seed": 160001,
+  "version": 1,
+  "versionNonce": 160002,
+  "isDeleted": false,
+  "groupIds": [],
+  "boundElements": null,
+  "link": null,
+  "locked": false,
+  "roundness": {"type": 3}
+}
+```
