@@ -395,6 +395,20 @@ Instead of full shapes, use small dots (10-20px ellipses) as:
 - **Secondary**: 120×60
 - **Small**: 60×40
 
+### Spacing & Grid System
+
+Use the **8-point grid**: all x/y coordinates, widths, heights, and gaps should be multiples of 8 (8, 16, 24, 32, 40, 48, 64, 80…). This creates subconscious visual rhythm and makes diagrams feel intentional rather than randomly placed.
+
+| Spacing Context | Value |
+|-----------------|-------|
+| Between major sections / zones | 80px minimum |
+| Between sibling components (same section) | 40px minimum |
+| Inner padding inside a container/swimlane | 24px |
+| Arrow gap from element edge | 8px (`gap: 8` in binding) |
+| Grid snap unit | 8px |
+
+**Why it matters for exports**: Diagrams rendered to PNG at reduced zoom levels collapse perceived spacing. What looks like adequate whitespace at 100% can feel cramped at 50%. Use the 80/40/24 values as floors, not targets — err toward more space.
+
 ### Whitespace = Importance
 The most important element has the most empty space around it (200px+).
 
