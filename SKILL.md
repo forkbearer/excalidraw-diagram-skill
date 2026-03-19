@@ -399,6 +399,49 @@ Colors encode information, not decoration. Every color choice should come from `
 
 ---
 
+## Arrow Semantics
+
+Arrows carry meaning beyond just "A connects to B". Use style consistently so a viewer can read the interaction type without a label.
+
+| Arrow Style | `strokeStyle` | `endArrowhead` | Meaning |
+|-------------|--------------|----------------|---------|
+| Solid + filled arrow | `"solid"` | `"arrow"` | Synchronous call / request |
+| Dashed + filled arrow | `"dashed"` | `"arrow"` | Asynchronous message / event |
+| Dashed + no arrowhead | `"dashed"` | `null` | Dependency / reference (no active flow) |
+| Solid + open circle | `"solid"` | `"dot"` | Data stream / continuous flow |
+
+**Rules:**
+- Every arrow must use one of the styles above — do not mix styles arbitrarily.
+- The arrow's `strokeColor` should match the source element's semantic stroke color from the palette.
+- Label arrows only when the interaction name adds meaning not already clear from source/target (e.g. `"POST /orders"`, `"OrderPlaced event"`). Keep labels at 14px.
+
+---
+
+## Legend
+
+**Architecture diagrams must include a legend.** Viewers should not have to guess what a dashed box, a color, or an arrow style means.
+
+### When to include a legend
+- Any diagram with more than one arrow style
+- Any diagram with external systems (dashed stroke)
+- Any diagram with color-coded domains or zones
+- Any comprehensive/technical diagram
+
+### What the legend must explain
+- Each distinct shape type used (service, database, queue, external system, user)
+- Each arrow style used (sync call, async event, dependency)
+- Each zone color if domain color-coding is used
+
+### How to render the legend
+Place it as a group of small examples in a corner of the canvas (bottom-left or bottom-right), away from the main diagram. Use:
+- A small version of each shape (60×32) with a short label beside it (14px free-floating text)
+- A short arrow sample for each arrow style used
+- A section title "Legend" at 20px above the group
+
+Do NOT use a container box around the legend — free-floating elements with consistent spacing are cleaner.
+
+---
+
 ## Modern Aesthetics
 
 For clean, professional diagrams:
@@ -624,11 +667,16 @@ uv run playwright install chromium
 19. **Opacity**: `opacity: 100` for all elements (no transparency)
 20. **Container ratio**: <30% of text elements should be inside containers
 
+### Arrow & Legend
+21. **Arrow semantics consistent**: Solid = sync, dashed = async, each style used only for its defined meaning
+22. **Legend present**: Any diagram with multiple arrow styles, external systems, or color-coded zones includes a legend
+23. **Legend readable**: Legend uses 14px labels, small shape samples, placed in a corner without a container box
+
 ### Visual Validation (Render Required)
-21. **Rendered to PNG**: Diagram has been rendered and visually inspected
-22. **No text overflow**: All text fits within its container
-23. **No overlapping elements**: Shapes and text don't overlap unintentionally
-24. **Even spacing**: Similar elements have consistent spacing
-25. **Arrows land correctly**: Arrows connect to intended elements without crossing others
-26. **Readable at export size**: Text is legible in the rendered PNG
-27. **Balanced composition**: No large empty voids or overcrowded regions
+24. **Rendered to PNG**: Diagram has been rendered and visually inspected
+25. **No text overflow**: All text fits within its container
+26. **No overlapping elements**: Shapes and text don't overlap unintentionally
+27. **Even spacing**: Similar elements have consistent spacing
+28. **Arrows land correctly**: Arrows connect to intended elements without crossing others
+29. **Readable at export size**: Text is legible in the rendered PNG
+30. **Balanced composition**: No large empty voids or overcrowded regions
