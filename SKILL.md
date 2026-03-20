@@ -532,6 +532,17 @@ Position alone doesn't show relationships. If A relates to B, there must be an a
 
 Settings: `fontFamily: 3`, `textAlign: "center"`, `verticalAlign: "middle"`
 
+### No Element ID References in Text
+
+The `text` and `originalText` fields must contain ONLY human-readable words. Never include:
+- Element ID references like `^s1L`, `^t1`, `^arrow1`
+- Any `^` prefix followed by an element ID
+- Raw binding syntax or internal references
+
+These are element IDs that belong ONLY in structural fields (`id`, `containerId`, `startBinding.elementId`, `endBinding.elementId`, `boundElements[].id`). They must NEVER appear in `text` or `originalText`.
+
+**Self-check after generating each section**: Scan every `"text"` and `"originalText"` value. If any contains `^` followed by alphanumeric characters, it's a leaked element ID — replace it with the actual readable label.
+
 ### Font Size Hierarchy
 
 Use consistent font sizes across the diagram to establish visual hierarchy. Never go below 14px — text smaller than that becomes unreadable in PNG exports.
@@ -661,7 +672,7 @@ uv run playwright install chromium
 15. **Hierarchy**: Important elements are larger/more isolated
 
 ### Technical
-16. **Text clean**: `text` contains only readable words
+16. **Text clean**: `text` and `originalText` contain only readable words — no `^elementId` references, no binding syntax, no raw IDs
 17. **Font**: `fontFamily: 3`
 18. **Roughness**: `roughness: 0` for clean/modern (unless hand-drawn style requested)
 19. **Opacity**: `opacity: 100` for all elements (no transparency)
