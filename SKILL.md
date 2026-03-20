@@ -567,7 +567,7 @@ Use consistent font sizes across the diagram to establish visual hierarchy. Neve
   "source": "https://excalidraw.com",
   "elements": [...],
   "appState": {
-    "viewBackgroundColor": "#ffffff",
+    "viewBackgroundColor": "transparent",
     "gridSize": 20
   },
   "files": {}
